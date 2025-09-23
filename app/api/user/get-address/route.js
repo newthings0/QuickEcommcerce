@@ -13,7 +13,7 @@ export async function GET(request) {
 
         const addresses = await Address.find({userId})
 
-        return NextResponse.json({ success: true, addresses })
+        return NextResponse.json({ success: true, addresses });
 
     } catch (error) {
         return NextResponse.json({ success: false, message: error.message });

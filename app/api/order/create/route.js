@@ -1,8 +1,8 @@
 import { inngest } from "@/config/inngest";
 import Product from "@/models/Product";
-import { getAuth, User } from "@clerk/nextjs/server";
+import User from "@/models/User";
+import { getAuth} from "@clerk/nextjs/server";
 import { NextResponse } from "next/server";
-
 
 
 export async function POST(request) {
@@ -12,15 +12,14 @@ export async function POST(request) {
         const { address, items } = await request.json();
 
         if (!address || items.length === 0) {
-            return NextResponse.json({ success: false, message: 'Invalid data'});
-            
+            return NextResponse.json({ success: false, message: 'Invalid data'})
         }
 
         //calculate amount using items
         const amount = await items.reduce(async (acc, item) => {
             const product = await Product.findById(item.product);
             return acc + product.offerPrice * item.quantity
-        }, 0)
+        },0)
 
         await inngest.send({
             name: 'order/created',
@@ -28,7 +27,7 @@ export async function POST(request) {
                 userId,
                 address,
                 items,
-                amunt: amount + Math.floor(amount * 0.02),
+                amount: amount + Math.floor(amount * 0.02),
                 date: Date.now()
             }
         })
@@ -41,7 +40,7 @@ export async function POST(request) {
         return NextResponse.json({ success: true, message: 'Order Placed'})
         
     } catch (error) {
-        console.log(error);
+        console.log(error)
         return NextResponse.json({ success: false, message: error.message })
     }
 }
