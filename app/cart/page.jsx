@@ -87,7 +87,7 @@ const Cart = () => {
                           </button>
                           <input onChange={e => updateCartQuantity(product._id, Number(e.target.value))} type="number" value={cartItems[itemId]} className="w-8 border text-center appearance-none"></input>
                           <button onClick={() => addToCart(product._id)}>
-                            <Image
+                            <Image loading='lazy'
                               src={assets.increase_arrow}
                               alt="increase_arrow"
                               className="w-4 h-4"
@@ -107,6 +107,7 @@ const Cart = () => {
               className="group-hover:-translate-x-1 transition"
               src={assets.arrow_right_icon_colored}
               alt="arrow_right_icon_colored"
+              
             />
             Continue Shopping
           </button>

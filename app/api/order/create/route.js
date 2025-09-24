@@ -12,7 +12,7 @@ export async function POST(request) {
         const { address, items } = await request.json();
 
         if (!address || items.length === 0) {
-            return NextResponse.json({ success: false, message: 'Invalid data'})
+            return NextResponse.json({ success: false, message: 'Invalid data' })
         }
 
         //calculate amount using items
@@ -23,7 +23,7 @@ export async function POST(request) {
 
         await inngest.send({
             name: 'order/created',
-            data: {
+            data:{
                 userId,
                 address,
                 items,
