@@ -78,9 +78,17 @@ const MyOrders = () => {
                                 <p className="font-medium my-auto">{currency}{order.amount}</p>
                                 <div>
                                     <p className="flex flex-col">
-                                        <span>Method : COD</span>
+                                        {/* <span>Method : COD</span> */}
+                                        <span>Method : Bank Transfer</span>
                                         <span>Date : {new Date(order.date).toLocaleDateString()}</span>
                                         <span>Payment : Pending</span>
+                                    </p>
+                                </div>
+                                <div>
+                                    <p className="flex flex-col">
+                                        <span>Check Your Email</span>
+                                        <span>For An Account </span>
+                                        <span>Details</span>
                                     </p>
                                 </div>
                             </div>
